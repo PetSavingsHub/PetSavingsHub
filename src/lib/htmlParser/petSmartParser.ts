@@ -3,7 +3,7 @@ import { parse } from 'node-html-parser';
 
 export function parseHTML(html: string) {
   const products: product[] = [];
-  const root = parse(test);
+  const root = parse(html);
   const itemsATags = root.querySelectorAll('.name-link');
   itemsATags.forEach((item) => {
     const name = item.getAttribute('title');
@@ -52,7 +52,7 @@ export function parseHTML(html: string) {
           if (!salesPriceText) return;
           product.salesPrice = priceParser(salesPriceText);
         } else {
-          console.log("No sales price");
+          // console.log("No sales price");
         }
       } else {
         console.log("No productPricing");
@@ -65,7 +65,7 @@ export function parseHTML(html: string) {
       return;
     }
   });
-  
+
   return products;
 }
 

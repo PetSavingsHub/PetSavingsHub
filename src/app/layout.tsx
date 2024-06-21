@@ -22,7 +22,9 @@ export default function RootLayout({
           inter.className, 
           "w-screen h-screen flex justify-center"
         )}>
-        {children}
+        <div className="h-screen w-full max-w-[1630px]">
+          {children}
+        </div>
       </body>
     </html>
   );
