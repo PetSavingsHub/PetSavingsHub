@@ -42,4 +42,15 @@ export const webs: menuItem[] = [
     ],
     logo: '/Chewy.png',
   },
+  {
+    name: "Ren's Pet",
+    listItem: [
+      {
+        name: 'Deals',
+        href: '/renspet/deals',
+        detail: "Check Deals"
+      }
+    ],
+    logo: '/RensPet.png',
+  },
 ]
