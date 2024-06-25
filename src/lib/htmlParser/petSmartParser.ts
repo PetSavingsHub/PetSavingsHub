@@ -4,6 +4,7 @@ import { parse } from 'node-html-parser';
 export function parseHTML(html: string) {
   const products: product[] = [];
   const root = parse(html);
+  const maxPage = root.querySelector('.page-last')?.textContent || root.querySelector('.current-page')?.textContent || "" ;
   const itemsATags = root.querySelectorAll('.name-link');
   itemsATags.forEach((item) => {
     const name = item.getAttribute('title');
@@ -59,6 +60,22 @@ export function parseHTML(html: string) {
         return;
       }
 
+      const productPromo = productTile.querySelector('.product-promo');
+      if (productPromo){
+        const promotionalMessages = productPromo.querySelectorAll('.promotional-message');
+        if (promotionalMessages.length > 0) {
+          product.promotionalMessages = [];
+          promotionalMessages.forEach((promotionalMessage) => {
+            const message = promotionalMessage.querySelector("p")?.textContent;
+            if (message) {
+              product.promotionalMessages?.push(message);
+            }
+          });
+        }
+      } else {
+        console.log("No productPromo");
+      }
+
       products.push(product);
     } else {
       console.log("No productTile");
@@ -66,7 +83,7 @@ export function parseHTML(html: string) {
     }
   });
 
-  return products;
+  return {products, maxPage};
 }
 
 function priceParser(rawPrice: string) {

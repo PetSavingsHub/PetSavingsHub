@@ -9,7 +9,7 @@ export async function getDeals(
   size: number,
   rule: string = "best-sellers"
 ) {
-  await sleep(3000);
+  // await sleep(3000);
   const DEAL_URL = `https://www.petsmart.ca/sale/june/?pmin=0.01&srule=${rule}&start=${start}&sz=${size}&format=ajax`;
   const response = await fetch(DEAL_URL, {
     method: "POST",

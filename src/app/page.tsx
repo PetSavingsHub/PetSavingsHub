@@ -14,16 +14,28 @@ export default function Home() {
     <div className="flex h-full">
       <div className="w-[30%] flex flex-col justify-center items-center gap-3">
         <Logo className="mr-10" />
-        <h1 className="text-5xl  font-bold">
+        <h1 className="text-5xl font-bold">
           PET SAVING HUB
         </h1>
       </div>
       <div className="w-[70%] bg-[#4B5763] p-5">
         <NavBar />
-        <Suspense fallback={<SuggestionsLoading />}>
-          <Suggestions />
-        </Suspense>
+        <div className="flex justify-center items-center mt-10 mb-6 text-4xl w-full text-orange-600 font-bold">Top Suggestions</div>
+        {
+          ["PetSmart", "Chewy"].map(web => <WebSuggestion key={web} web={web} />)
+        }
       </div>
     </div>
+  );
+}
+
+function WebSuggestion({ web }: { web: string }) {
+  return (
+    <>
+      <h1 className="text-xl text-white mt-4">{web}</h1>
+      <Suspense fallback={<SuggestionsLoading />}>
+        <Suggestions web={web.toLowerCase()} />
+      </Suspense>
+    </>
   );
 }

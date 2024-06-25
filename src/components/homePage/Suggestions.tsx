@@ -1,21 +1,34 @@
-import { getDeals } from "@/actions/petsmart/getDeals";
-import { product } from "@/constants/commonTypes";
-import { parseHTML } from "@/lib/htmlParser/petSmartParser";
-import { cn } from "@/lib/utils";
+import { getDeals as petsmartGetdeals } from "@/actions/petsmart/getDeals";
+import { getDeals as chewyGetDeals } from "@/actions/chewy/getDeals";
 import ItemCard from "../common/ItemCard";
 
-export async function Suggestions() {
-  const suggestions = await getDeals(0, 5);
+export async function Suggestions({
+  web
+}: {
+  web: string
+}) {
+  const {products} = await getDeals(web, 0, 5);
 
   return (
     <div className="w-full h-fit py-5 overflow-x-auto">
       <div className="flex justify-start items-center gap-3">
       {
-        suggestions.map((suggestion, index) => (
-          <ItemCard item={suggestion} key={index} />
+        products.map((product, index) => (
+          <ItemCard item={product} key={index} />
         ))
       }
       </div>
     </div>
   )
+}
+
+async function getDeals(web: string, page: number, limit: number) {
+  switch (web) {
+    case "petsmart":
+      return petsmartGetdeals(page, limit);
+    case "chewy":
+      return chewyGetDeals(page, limit);
+    default:
+      return {products: []};
+  }
 }

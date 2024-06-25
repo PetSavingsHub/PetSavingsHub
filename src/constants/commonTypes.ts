@@ -4,4 +4,5 @@ export type product = {
   img: string
   regularPrice: string
   salesPrice?: string
+  promotionalMessages?: string[]
 }
