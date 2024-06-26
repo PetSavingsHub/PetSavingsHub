@@ -18,7 +18,7 @@ export default function Home() {
           PET SAVING HUB
         </h1>
       </div>
-      <div className="w-[70%] bg-[#4B5763] p-5">
+      <div className="w-[70%] bg-[#4B5763] p-5 h-fit">
         <NavBar />
         <div className="flex justify-center items-center mt-10 mb-6 text-4xl w-full text-orange-600 font-bold">Top Suggestions</div>
         {
