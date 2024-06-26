@@ -1,5 +1,6 @@
 import { getDeals as petsmartGetDeals } from "@/actions/petsmart/getDeals";
 import { getDeals as chewyGetDeals } from "@/actions/chewy/getDeals";
+import { getDeals as petValuGetDeals } from "@/actions/petvalu/getDeals";
 import ItemCard from "@/components/common/ItemCard";
 import Pages from "@/components/common/Pagination";
 import { Suspense } from "react";
@@ -67,6 +68,8 @@ async function getDeals(web: string, page: string) {
       return await petsmartGetDeals((parseInt(page)-1) * 36, 36);
     case "chewy":
       return await chewyGetDeals((parseInt(page)-1) * 36, 36);
+    case "petvalu":
+      return await petValuGetDeals((parseInt(page)-1) * 36, 36);
     default:
       return {
         products: [],
