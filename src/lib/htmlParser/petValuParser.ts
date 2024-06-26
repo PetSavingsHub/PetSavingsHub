@@ -4,7 +4,11 @@ import { parse } from 'node-html-parser';
 export async function parseHtmlPetValu(html:string){
     const products: product[] = [];
     const root = parse(html);
-    const maxPage = "21";
+    const pages = root.querySelector('.page-buttons__wrapper')?.querySelectorAll('a');
+    let maxPage = '';
+    if(pages && pages.length){
+        maxPage = pages[pages.length - 1].getAttribute('data-text') || '';
+    }
     const itemsATags = root.querySelectorAll('.product-tile');
     itemsATags.forEach((item) => {
 //TODO  当textcontent后面是？？时有bug：name is undefined,是||时无bug
@@ -12,6 +16,8 @@ export async function parseHtmlPetValu(html:string){
         const nameRight = item.querySelector('.title__right')?.querySelector('.P1.regular')?.textContent || '';
         const name = nameLeft + nameRight;
         const href = item.querySelector('img')?.getAttribute('src');
+        const rewardProgram = item.querySelector('.your-rewards');
+
         const product: product = {
             name: (name || ""),
             href: href || "",
@@ -37,6 +43,14 @@ export async function parseHtmlPetValu(html:string){
             const salesPriceText = currentPrice.textContent;
             if (!salesPriceText) return;
             product.salesPrice = priceParser(salesPriceText);
+        }
+        if(rewardProgram){
+            const rewardText = rewardProgram.textContent;
+            const message = "Your Rewards™ Program";
+            if(rewardText){
+                product.promotionalMessages = [];
+                product.promotionalMessages?.push(message);
+            }
         }
         products.push(product);
 

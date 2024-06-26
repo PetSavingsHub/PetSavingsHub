@@ -40,7 +40,7 @@ async function Items({
 
   const {products, maxPage} = await getDeals(web, page);
   try {
-    if (parseInt(page) > parseInt(maxPage)) {
+    if (parseInt(page) > parseInt(maxPage as string)) {
       return <div>Page not found</div>;
     }
   } catch {
@@ -69,7 +69,7 @@ async function getDeals(web: string, page: string) {
     case "chewy":
       return await chewyGetDeals((parseInt(page)-1) * 36, 36);
     case "petvalu":
-      return await petValuGetDeals((parseInt(page)-1) * 36, 36);
+      return await petValuGetDeals((parseInt(page)), 36);
     default:
       return {
         products: [],
