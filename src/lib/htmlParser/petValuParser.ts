@@ -4,7 +4,7 @@ import { parse } from 'node-html-parser';
 export async function parseHtmlPetValu(html:string){
     const products: product[] = [];
     const root = parse(html);
-    const maxPage = 21;
+    const maxPage = "21";
     const itemsATags = root.querySelectorAll('.product-tile');
     itemsATags.forEach((item) => {
 //TODO  当textcontent后面是？？时有bug：name is undefined,是||时无bug
