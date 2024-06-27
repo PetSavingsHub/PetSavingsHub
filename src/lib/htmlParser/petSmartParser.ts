@@ -1,28 +1,33 @@
-import { product } from '@/constants/commonTypes';
-import { parse } from 'node-html-parser';
+import { product } from "@/constants/commonTypes";
+import { parse } from "node-html-parser";
 
 export function parseHTML(html: string) {
   const products: product[] = [];
   const root = parse(html);
-  const maxPage = root.querySelector('.page-last')?.textContent || root.querySelector('.current-page')?.textContent || "" ;
-  const itemsATags = root.querySelectorAll('.name-link');
+  const maxPage =
+    root.querySelector(".page-last")?.textContent ||
+    root.querySelector(".current-page")?.textContent ||
+    "";
+  const itemsATags = root.querySelectorAll(".name-link");
   itemsATags.forEach((item) => {
-    const name = item.getAttribute('title');
-    const href = item.getAttribute('href');
+    const name = item.getAttribute("title");
+    const href = item.getAttribute("href");
     const product: product = {
-      name: (name || "").replace("&trade;", "™"), 
-      href: href || "", 
+      name: (name || "").replace("&trade;", "™"),
+      href: href || "",
       img: "",
       regularPrice: "",
     };
 
-    const productTile = item.querySelector('.product-tile');
+    const productTile = item.querySelector(".product-tile");
     if (productTile) {
-      const productImageWrapper = productTile.querySelector(".product-image-wrapper");
+      const productImageWrapper = productTile.querySelector(
+        ".product-image-wrapper"
+      );
       if (productImageWrapper) {
-        const imgNode = productImageWrapper.querySelector('img');
+        const imgNode = productImageWrapper.querySelector("img");
         if (imgNode) {
-          const img = imgNode.getAttribute('src');
+          const img = imgNode.getAttribute("src");
           if (!img) return;
 
           product.img = img;
@@ -36,10 +41,11 @@ export function parseHTML(html: string) {
 
       const productPricing = productTile.querySelector(".product-pricing");
       if (productPricing) {
-        const priceRagular = productPricing.querySelector('.price-regular');
-        const priceStandard = productPricing.querySelector('.price-standard');
+        const priceRagular = productPricing.querySelector(".price-regular");
+        const priceStandard = productPricing.querySelector(".price-standard");
         if (priceRagular || priceStandard) {
-          const regularPriceText = priceRagular?.textContent ||  priceStandard?.textContent;
+          const regularPriceText =
+            priceRagular?.textContent || priceStandard?.textContent;
           if (!regularPriceText) return;
           product.regularPrice = priceParser(regularPriceText);
         } else {
@@ -47,7 +53,7 @@ export function parseHTML(html: string) {
           return;
         }
 
-        const priceSales = productPricing.querySelector('.price-sales');
+        const priceSales = productPricing.querySelector(".price-sales");
         if (priceSales) {
           const salesPriceText = priceSales.textContent;
           if (!salesPriceText) return;
@@ -60,9 +66,11 @@ export function parseHTML(html: string) {
         return;
       }
 
-      const productPromo = productTile.querySelector('.product-promo');
-      if (productPromo){
-        const promotionalMessages = productPromo.querySelectorAll('.promotional-message');
+      const productPromo = productTile.querySelector(".product-promo");
+      if (productPromo) {
+        const promotionalMessages = productPromo.querySelectorAll(
+          ".promotional-message"
+        );
         if (promotionalMessages.length > 0) {
           product.promotionalMessages = [];
           promotionalMessages.forEach((promotionalMessage) => {
@@ -83,7 +91,7 @@ export function parseHTML(html: string) {
     }
   });
 
-  return {products, maxPage};
+  return { products, maxPage };
 }
 
 function priceParser(rawPrice: string) {
@@ -2861,4 +2869,4 @@ Wellness CORE
 </div>
 </div>
 </div>
-`
+`;
