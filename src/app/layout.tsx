@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import GoogleAdsense from "../app/GoogleAdsense";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770348903814124"
-            crossOrigin="anonymous"></script>
       <body className={
         cn(
           inter.className, 
@@ -28,6 +27,7 @@ export default function RootLayout({
           {children}
         </div>
       </body>
+      <GoogleAdsense pId="2770348903814124" />
     </html>
   );
 }
