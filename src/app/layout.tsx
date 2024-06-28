@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import GoogleAdsense from "../app/GoogleAdsense";
+import GoogleAdsense from "@/app/GoogleAdsense";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,16 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body className={
         cn(
-          inter.className, 
+          inter.className,
           "w-screen h-screen flex justify-center"
         )}>
         <div className="h-screen w-full max-w-[1630px]">
           {children}
         </div>
       </body>
-      <GoogleAdsense pId="2770348903814124" />
     </html>
   );
 }
