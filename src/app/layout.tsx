@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-//import GoogleAdsense from "@/app/GoogleAdsense";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <body className={
         cn(
           inter.className,
@@ -27,6 +26,9 @@ export default function RootLayout({
         <div className="h-screen w-full max-w-[1630px]">
           {children}
         </div>
+        <Script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770348903814124"
+                crossOrigin="anonymous"></Script>
       </body>
     </html>
   );
