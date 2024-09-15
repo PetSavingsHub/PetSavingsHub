@@ -22,7 +22,7 @@ export default function Home() {
         <NavBar />
         <div className="flex justify-center items-center mt-10 mb-6 text-4xl w-full text-orange-600 font-bold">Top Suggestions</div>
         {
-          ["PetSmart","PetValu", "Chewy"].map(web => <WebSuggestion key={web} web={web} />)
+          ["PetSmart", "PetValu", "Chewy", "Ren's Pet"].map(web => <WebSuggestion key={web} web={web} />)
         }
       </div>
     </div>
