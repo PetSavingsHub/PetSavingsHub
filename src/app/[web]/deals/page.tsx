@@ -1,6 +1,7 @@
 import { getDeals as petsmartGetDeals } from "@/actions/petsmart/getDeals";
 import { getDeals as chewyGetDeals } from "@/actions/chewy/getDeals";
 import { getDeals as petValuGetDeals } from "@/actions/petvalu/getDeals";
+import { getDeals as rensPetsGetDeals } from "@/actions/renspets/getDeals";
 import ItemCard from "@/components/common/ItemCard";
 import Pages from "@/components/common/Pagination";
 import { Suspense } from "react";
@@ -41,6 +42,7 @@ async function Items({
   const {products, maxPage} = await getDeals(web, page);
   try {
     if (parseInt(page) > parseInt(maxPage as string)) {
+      console.log("Page is bigger than max page", maxPage)
       return <div>Page not found</div>;
     }
   } catch {
@@ -70,6 +72,8 @@ async function getDeals(web: string, page: string) {
       return await chewyGetDeals((parseInt(page)-1) * 36, 36);
     case "petvalu":
       return await petValuGetDeals((parseInt(page)), 36);
+    case "renspets":
+      return await rensPetsGetDeals((parseInt(page)), 36);
     default:
       return {
         products: [],

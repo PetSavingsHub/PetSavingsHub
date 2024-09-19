@@ -43,11 +43,11 @@ export const webs: menuItem[] = [
     logo: '/Chewy.png',
   },
   {
-    name: "Ren's Pet",
+    name: "Ren's Pets",
     listItem: [
       {
         name: 'Deals',
-        href: '/renspet/deals',
+        href: '/renspets/deals',
         detail: "Check Deals"
       }
     ],
