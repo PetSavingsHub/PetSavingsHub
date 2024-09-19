@@ -15,12 +15,12 @@ export async function parseHtmlPetValu(html:string){
         const nameLeft = item.querySelector('.title__left')?.querySelector('.P1.bold')?.textContent || '';
         const nameRight = item.querySelector('.title__right')?.querySelector('.P1.regular')?.textContent || '';
         const name = nameLeft + nameRight;
-        const href = item.querySelector('img')?.getAttribute('src');
+        const href = item.querySelector('a')?.getAttribute('href');
         const rewardProgram = item.querySelector('.your-rewards');
 
         const product: product = {
             name: (name || ""),
-            href: href || "",
+            href: `https://www.petvalu.ca${href}` || "",
             img: "",
             regularPrice: "",
         };

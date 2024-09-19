@@ -5,13 +5,15 @@ export function parseHTML(html: string) {
   const products: product[] = [];
   const root = parse(html);
   const maxPage = root.querySelector('.page-last')?.textContent || root.querySelector('.current-page')?.textContent || "" ;
+	// const script = root.querySelector('#plp-collections-seo')
+	// console.log("script", script?.rawText)
   const itemsATags = root.querySelectorAll('.name-link');
   itemsATags.forEach((item) => {
     const name = item.getAttribute('title');
     const href = item.getAttribute('href');
     const product: product = {
       name: (name || "").replace("&trade;", "™"), 
-      href: href || "", 
+      href: `https://www.petsmart.ca${href}` || "", 
       img: "",
       regularPrice: "",
     };

@@ -9,7 +9,7 @@ export async function getDeals(
   size: number,
   rule: string = "best-sellers"
 ) {
-  const DEAL_URL = `https://www.petsmart.ca/sale/september/?pmin=0.01&srule=${rule}&start=${start}&sz=${size}&format=ajax` //&start=${start}&sz=${size}&format=ajax`;
+  const DEAL_URL = `https://www.petsmart.ca/sale/?pmin=0.01&srule=${rule}&start=${start}&sz=${size}&format=ajax` //`https://www.petsmart.ca/sale/september/?pmin=0.01&srule=${rule}&start=${start}&sz=${size}&format=ajax` //&start=${start}&sz=${size}&format=ajax`;
   const response = await fetch(DEAL_URL, {
     method: "GET",
     headers: {
