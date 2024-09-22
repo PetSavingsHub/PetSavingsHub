@@ -8,10 +8,11 @@ import {
 } from "@/components/ui/navigation-menu"
 import { webs } from "@/constants/webs";
 import NavMenuItem from "./NavMenuItem";
+import { SearchBar } from "../search/SearchBar";
 
 export function NavBar() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="flex justify-between w-full max-w-full">
       <NavigationMenuList>
         {
           webs.map((item) => (
@@ -19,6 +20,7 @@ export function NavBar() {
           ))
         }
       </NavigationMenuList>
+      <SearchBar />
     </NavigationMenu>
   )
 }

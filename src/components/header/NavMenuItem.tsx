@@ -25,7 +25,8 @@ export default function NavMenuItem({
             <NavigationMenuLink asChild>
               <a
                 className="flex h-full w-full select-none flex-col justify-center items-center from-muted/50 to-muted px-6 no-underline outline-none"
-                href="/"
+                target="_blank"
+                href={item.link}
               >
                 <Image src={item.logo} alt={item.name} width={100} height={100} />
               </a>

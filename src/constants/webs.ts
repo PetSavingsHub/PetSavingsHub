@@ -1,4 +1,5 @@
 export type menuItem = {
+  id: string
   name: string
   listItem: {
     name: string
@@ -6,10 +7,12 @@ export type menuItem = {
     href: string
   }[]
   logo: string
+  link: string
 }
 
 export const webs: menuItem[] = [
   {
+    id: "petsmart",
     name: 'PetSmart',
     listItem: [
       {
@@ -19,8 +22,10 @@ export const webs: menuItem[] = [
       }
     ],
     logo: '/PetSmart.png',
+    link: "https://www.petsmart.ca/"
   },
   {
+    id: "petvalu",
     name: 'Pet Valu',
     listItem: [
       {
@@ -30,8 +35,10 @@ export const webs: menuItem[] = [
       }
     ],
     logo: '/PetValu.png',
+    link: "https://www.petvalu.ca/"
   },
   {
+    id: "chewy",
     name: 'Chewy',
     listItem: [
       {
@@ -41,8 +48,10 @@ export const webs: menuItem[] = [
       }
     ],
     logo: '/Chewy.png',
+    link: "https://www.chewy.com/ca"
   },
   {
+    id: "renspets",
     name: "Ren's Pets",
     listItem: [
       {
@@ -52,5 +61,6 @@ export const webs: menuItem[] = [
       }
     ],
     logo: '/RensPet.png',
+    link: "https://www.renspets.com/"
   },
 ]

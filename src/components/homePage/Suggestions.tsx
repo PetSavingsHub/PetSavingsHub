@@ -3,14 +3,15 @@ import { getDeals as chewyGetDeals } from "@/actions/chewy/getDeals";
 import { getDeals as petValuGetDeals } from "@/actions/petvalu/getDeals";
 import { getDeals as rensPetsGetDeals } from "@/actions/renspets/getDeals";
 import ItemCard from "../common/ItemCard";
+import { menuItem } from "@/constants/webs";
 
 export async function Suggestions({
   web
 }: {
-  web: string
+  web: menuItem
 }) {
 
-  const {products} = await getDeals(web, 0, 5);
+  const {products} = await getDeals(web.id, 0, 5);
   return (
     <div className="w-full h-fit py-5 overflow-x-auto">
       <div className="flex justify-start items-center gap-3">

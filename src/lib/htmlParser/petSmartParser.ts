@@ -88,6 +88,36 @@ export function parseHTML(html: string) {
   return {products, maxPage};
 }
 
+export function parseSearchResults(html: string, web?: string) {
+	const root = parse(html);
+	const products = root.querySelectorAll('#product-card');
+	const results: product[] = [];
+	products.forEach((product) => {
+		const ATag = product.querySelector('.sparky-c-product-card__text-link');
+		const name = ATag?.innerText;
+		const href = ATag?.getAttribute('href');
+		const img = product.querySelector('.sparky-c-product-card__image')?.getAttribute("src");
+		const regularPrice = product.querySelector('.sparky-c-product-card__price-group')?.innerText;
+		const salesPrice = product.querySelector('.sparky-c-price--sale')?.innerText;
+		const prod: product = {
+			name: nameParser(name || ""),
+			href: `https://www.petsmart.ca${href}` || "",
+			img: img || "",
+			regularPrice: regularPrice ? priceParser(regularPrice) : "",
+			salesPrice: salesPrice ? priceParser(salesPrice) : "",
+			web: web
+		};
+		results.push(prod);
+	});
+	return {products: results}
+}
+
+function nameParser(rawName: string) {
+	return rawName.replaceAll("&amp;", "&")
+		.replace("&#x27;", "’")
+		.replace("&trade;", "™");
+}
+
 function priceParser(rawPrice: string) {
   return rawPrice
     .replace("Old Price\n", "")

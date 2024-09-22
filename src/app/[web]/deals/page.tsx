@@ -5,6 +5,9 @@ import { getDeals as rensPetsGetDeals } from "@/actions/renspets/getDeals";
 import ItemCard from "@/components/common/ItemCard";
 import Pages from "@/components/common/Pagination";
 import { Suspense } from "react";
+import Loading from "./loading";
+import { webs } from "@/constants/webs";
+import Image from "next/image";
 
 export default function WebMain({
   params,
@@ -18,7 +21,7 @@ export default function WebMain({
   }
 }) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <Items web={params.web} page={searchParams.page || "1"} />
     </Suspense>
   )
@@ -51,7 +54,11 @@ async function Items({
   return (
     <>
       <div className="flex w-full justify-between items-center pb-4">
-        <h1 className="text-2xl font-bold text-white">{web.toUpperCase()}</h1>
+        {/* <h1 className="text-2xl font-bold text-white text-nowrap">{webs.filter(w => w.id === web)[0].name}</h1> */}
+        <div className="flex items-center gap-2">
+          <Image src={webs.filter(w => w.id === web)[0].logo} alt={web} width={120} height={90} />
+          <h1 className="text-xl font-bold text-white text-nowrap">Deals</h1>
+        </div>
         <Pages maxPage={maxPage} currentPage={page} className="justify-end" />
       </div>
       <div className="w-full flex flex-wrap gap-12 mb-5">

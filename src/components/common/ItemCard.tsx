@@ -2,6 +2,8 @@ import { product } from "@/constants/commonTypes"
 import { cn } from "@/lib/utils"
 import PriceTooltip from "./PriceToolTip";
 import Link from "next/link";
+import Image from "next/image";
+import ImageWithFallBack from "./Image";
 
 export default function ItemCard({
   item
@@ -10,9 +12,24 @@ export default function ItemCard({
 }) {
   return (
     <Link href={item.href} target="_blank">
-      <div className="min-w-[210px] w-[210px] h-[350px] bg-white p-5 rounded-lg shadow-lg grid grid-rows-5">
+      <div className="relative min-w-[210px] w-[210px] h-[350px] bg-white p-5 rounded-lg shadow-lg grid grid-rows-5">
+        {
+          item.web && (
+            <div className="absolute -top-3 -left-3 bg-gray-100 rounded-lg shadow-md p-2">
+              {
+                item.web === "petsmart"
+                ? <Image src={"/PetSmart.png"} alt={"Pet Smart"} width={60} height={30} />
+                : item.web === "petvalu"
+                ? <Image src={"/PetValu.png"} alt={"Pet Valu"} width={60} height={30} />
+                : item.web === "renspets"
+                ? <Image src={"/RensPet.png"} alt={"Ren's Pets"} width={60} height={30} />
+                : <Image src={"/Chewy.png"} alt={"Chewy"} width={60} height={30} />
+              }
+            </div>
+          )
+        }
         <div className="row-span-3 w-full flex justify-center items-center">
-          <img 
+          <ImageWithFallBack 
             src={item.img} 
             alt={item.name} 
             className="max-w-[95%] h-auto max-h-[90%]" 

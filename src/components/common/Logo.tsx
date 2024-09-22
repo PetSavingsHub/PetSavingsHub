@@ -15,7 +15,7 @@ export default function Logo({
       src={color == "black" ? "/logo-trans.png" : "/logo-white.png"}
       width={width}
       height={height}
-      alt="Pet Saving Hub"
+      alt="Pat Pet"
       className={className || ""}
     />
   )

@@ -1,7 +1,7 @@
 import { product } from '@/constants/commonTypes';
 import { parse } from 'node-html-parser';
 
-export async function parseHtmlPetValu(html:string){
+export function parseHtmlPetValu(html:string, web?:string){
     const products: product[] = [];
     const root = parse(html);
     const pages = root.querySelector('.page-buttons__wrapper')?.querySelectorAll('a');
@@ -14,7 +14,7 @@ export async function parseHtmlPetValu(html:string){
 //TODO  当textcontent后面是？？时有bug：name is undefined,是||时无bug
         const nameLeft = item.querySelector('.title__left')?.querySelector('.P1.bold')?.textContent || '';
         const nameRight = item.querySelector('.title__right')?.querySelector('.P1.regular')?.textContent || '';
-        const name = nameLeft + nameRight;
+        const name = `${nameLeft} ${nameRight}`;
         const href = item.querySelector('a')?.getAttribute('href');
         const rewardProgram = item.querySelector('.your-rewards');
 
@@ -23,6 +23,7 @@ export async function parseHtmlPetValu(html:string){
             href: `https://www.petvalu.ca${href}` || "",
             img: "",
             regularPrice: "",
+            web: web
         };
         const imageNode = item.querySelector('img');
         if(imageNode){
