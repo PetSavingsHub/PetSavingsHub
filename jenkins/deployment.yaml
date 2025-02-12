@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petsavinghub-deployment
+  labels:
+    app: petsavinghub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petsavinghub
+  template:
+    metadata:
+      labels:
+        app: petsavinghub
+    spec:
+      containers:
+      - name: petsavinghub
+        image: zshhero/petsavinghub:latest
+        ports:
+        - containerPort: 8080
+
