@@ -15,9 +15,9 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                sh 'npm install'  // Node.js 示例
-                sh 'npm test'  // 运行单元测试（如果有）
-            }
+                container('nodejs') {
+                    sh 'npm install'
+                }
         }
 
         stage('Build Docker Image') {
