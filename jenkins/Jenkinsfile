@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', credentialsId: '5aa9619d-be3b-4127-a8ee-9f153e81db9c', url: 'https://github.com/zshhero/petsavinghub.git'
+                git branch: 'main', credentialsId: '5aa9619d-be3b-4127-a8ee-9f153e81db9c', url: 'https://github.com/PetSavingsHub/PetSavingsHub'
             }
         }
 
